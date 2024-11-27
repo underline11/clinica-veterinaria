@@ -1,0 +1,51 @@
+set sql_save_updates = 0;
+create database clinicaveterinaria;
+USE clinicaveterinaria;
+create table cliente (
+cliente_id int auto_increment primary key,
+nome varchar(100),
+telefone varchar(15),
+email varchar(100),
+endereco varchar(255)
+);
+create table animais (
+cliente_id int auto_increment primary key,
+nome varchar(100),
+especie varchar(50),
+raca varchar(50),
+data_nascimento date not null,
+sexo enum('M, F')
+);
+create table veterinarios (
+veterinario_id int auto_increment primary key,
+nome varchar(100),
+especialidade varchar(50),
+telefone varchar(15),
+email varchar(100)
+);
+create table consultas (
+consulta_id int auto_increment primary key,
+animal_id int not null,
+veterinario_id int not null,
+data_consulta datetime,
+diagnostico text
+);
+create table tratamentos (
+tatamento_id int auto_increment primary key,
+consulta_id int not null,
+descricao text,
+medicamento varchar(100),
+dose varchar(50)
+);
+create table pagamentos (
+pagamento_id int auto_increment primary key,
+consulta_id int not null,
+valor decimal(10,2),
+data_pagamento date,
+metodo_pagamento enum('Dinheiro', 'Cartão', 'transferência')
+);
+
+
+insert into cliente ('nome', 'telefone', 'email', 'endereco')
+values
+('Fillipe','4845352684', 'Beller@gmail.com', 'Rua Costa');
